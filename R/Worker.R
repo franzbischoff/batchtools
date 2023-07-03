@@ -48,8 +48,8 @@ Worker = R6Class("Worker",
       } else {
         args = c("-e", shQuote("message(\"[bt] --BOF--\\n\", \"[bt] \", system.file(\"bin/linux-helper\", package = \"batchtools\"), \"\\n[bt] --EOF--\\n\")"))
         res = runOSCommand("Rscript", args, nodename = nodename)
-        script = private$filter_output(res)$output
-        if (!testString(script, min.chars = 1L)) {
+        self$script = private$filter_output(res)$output
+        if (!testString(self$script, min.chars = 1L)) {
           stopf("Unable to locate helper script on SSH node '%s'. Is batchtools installed on the node?", nodename)
         }
       }
